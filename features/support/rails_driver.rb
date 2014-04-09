@@ -1,10 +1,11 @@
 require 'aruba/api'
-
+require 'aruba/jruby' if (RUBY_PLATFORM == 'java')
 class RailsDriver
   include Aruba::Api
 
   def initialize
     @aruba_io_wait_seconds = 10
+    @aruba_timeout_seconds = (RUBY_PLATFORM) == 'java' ? 60 : 10
     # @announce_stdout = true
     # @announce_stderr = true
     # @announce_cmd = true
